@@ -1,3 +1,4 @@
+import 'package:bazei_taxi_app/screens/change_language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bazei_taxi_app/common/color_extension.dart';
 
@@ -10,6 +11,20 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  @override
+  void initState()
+  {
+    super.initState();
+  }
+
+  void load() async{
+    await Future.delayed(const Duration(seconds: 3));
+  }
+
+  void loadNextPage()
+  {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const ChangeLanguageScreen()));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
