@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Bazei Taxi',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: ThemeColor.primary,
         textTheme: GoogleFonts.nunitoSansTextTheme(
           Theme.of(context).textTheme,
         ),
