@@ -1,5 +1,5 @@
 import 'package:bazei_taxi_app/common/color_extension.dart';
-import 'package:bazei_taxi_app/screens/login_screen.dart';
+import 'package:bazei_taxi_app/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 
 class ChangeLanguageScreen extends StatefulWidget {
@@ -58,7 +58,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
                     selectchange = index;
                       
                     });
-                    context.push(const LoginScreen());
+                    context.push(const AuthScreen());
                   },
                   title: Text(
                     listArr[index], 
