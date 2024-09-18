@@ -18,6 +18,14 @@ class ThemeColor {
 
 extension AppContext on BuildContext {
   Size get size => MediaQuery.of(this).size; // Obtém o tamanho da tela
-  double get width => size.width;            // Obtém a largura da tela
-  double get height => size.height;          // Obtém a altura da tela
+  // double get width => size.width;            // Obtém a largura da tela
+  // double get height => size.height;          // Obtém a altura da tela
+
+  Future push(Widget widget) async{
+    return Navigator.push(this, MaterialPageRoute(builder: (context) => widget));
+  }
+
+  void pop() async{
+    return Navigator.pop(this);
+  }
 }

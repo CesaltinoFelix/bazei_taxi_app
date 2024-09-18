@@ -1,5 +1,6 @@
-import 'package:bazei_taxi_app/screens/change_language_screen.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:bazei_taxi_app/screens/walcome_screen.dart';
 import 'package:bazei_taxi_app/common/color_extension.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,15 +16,17 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState()
   {
     super.initState();
+    load();
   }
 
   void load() async{
     await Future.delayed(const Duration(seconds: 3));
+    loadNextPage();
   }
 
   void loadNextPage()
   {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const ChangeLanguageScreen()));
+    Get.to(()=> const WelcomeScreen(), transition: Transition.zoom, duration: const Duration(seconds: 1));
   }
   @override
   Widget build(BuildContext context) {
