@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void loadNextPage()
   {
-    Get.to(()=> const WelcomeScreen(), transition: Transition.fade, duration: const Duration(seconds: 1));
+    Get.to(()=> const WelcomeScreen(), transition: Transition.rightToLeft, duration: const Duration(seconds: 1));
   }
   @override
   Widget build(BuildContext context) {

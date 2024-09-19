@@ -74,7 +74,7 @@ class _AuthScreenState extends State<AuthScreen> {
               RoundButton(
                 title: "SIGN IN",
                 onPressed: () {
-                 Get.to(()=> const HomeScreen(), transition: Transition.fade, duration: const Duration(seconds: 1));
+                 Get.to(()=> const HomeScreen(), transition: Transition.rightToLeft, duration: const Duration(seconds: 1));
                 },
               ),
 
@@ -82,7 +82,7 @@ class _AuthScreenState extends State<AuthScreen> {
               
               TextButton(
                 onPressed: () {
-                 Get.to(()=> const SignUpScreen(), transition: Transition.fade, duration: const Duration(seconds: 1));
+                 Get.to(()=> const SignUpScreen(), transition: Transition.rightToLeft, duration: const Duration(seconds: 1));
                 },
                 child: Text(
                 "SIGN UP",
