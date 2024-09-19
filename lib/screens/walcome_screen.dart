@@ -1,4 +1,5 @@
 import 'package:bazei_taxi_app/screens/change_language_screen.dart';
+import 'package:bazei_taxi_app/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bazei_taxi_app/common/color_extension.dart';
 import 'package:get/get.dart';
@@ -10,22 +11,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
-  @override
-  void initState()
-  {
-    super.initState();
-    load();
-  }
-  void load() async{
-    await Future.delayed(const Duration(seconds: 3));
-    loadNextPage();
-  }
-
-  void loadNextPage()
-  {
-    Get.to(()=> const ChangeLanguageScreen(), transition: Transition.fade, duration: const Duration(seconds: 1));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,37 +36,57 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Column(
               children: [
                
-                const Spacer(),
+                SizedBox(height: context.height * 0.4,),
                 Align(
-                  alignment: Alignment.bottomLeft, // Alinha o texto ao canto inferior esquerdo
+                  alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          "Bem-vindo!",
-                          style: TextStyle(
-                            color: ThemeColor.primaryTextWhite,
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
                         const SizedBox(height: 8),
                         Image.asset("assets/images/logo1.png", 
-                        width: context.width * 0.8,
-                        height: context.height * 0.07,
+                        width: context.width * 0.6,
+                        height: context.height * 0.05,
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 20),
                         Text(
-                          "O jeito mais fácil de viajar pela cidade.",
+                          "A maneira mais prática e confortável de se deslocar pela cidade, com segurança e rapidez a qualquer hora.",
                           style: TextStyle(
                             color: ThemeColor.primaryTextWhite,
                             fontSize: 16,
+                            fontWeight: FontWeight.bold
                           ),
+                          textAlign: TextAlign.center,
                         ),
+
+                        SizedBox(height: context.height * 0.20),
+                        RoundButton(
+                          title: "Let's go!", 
+                          onPressed: (){
+                              Get.to(()=> const ChangeLanguageScreen(), transition: Transition.rightToLeft, duration: const Duration(seconds: 1));
+                          }),
                         
+                        SizedBox(height: context.height * 0.04),
+                        
+                        GestureDetector(
+                          onTap: (){},
+                          child: Container(
+                            //padding: const EdgeInsets.symmetric(vertical: 0,),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: ThemeColor.primaryTextWhite, width: 2 
+                                ),
+                                
+                              )
+                            ),
+                            child: Text(
+                              "Drive with Bazei", 
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: ThemeColor.primaryTextWhite)
+                              ),
+                          )
+                          )            
                       ],
                     ),
                   ),

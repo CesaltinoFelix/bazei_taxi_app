@@ -15,15 +15,16 @@ class RoundButton extends StatelessWidget {
       minWidth: double.maxFinite,
       elevation: 0,
       color: ThemeColor.secondary,
-      height: 45,
+      height: 60,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25)
+        borderRadius: BorderRadius.circular(5)
       ),
       child: Text(
           title,
           style: TextStyle(
             color: ThemeColor.primaryTextWhite,
-            fontSize: 16),
+            fontSize: 18,
+            fontWeight: FontWeight.bold),
         ),
     );
   }
