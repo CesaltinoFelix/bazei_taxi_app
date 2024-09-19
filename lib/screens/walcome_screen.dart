@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   void loadNextPage()
   {
-    Get.to(()=> const ChangeLanguageScreen(), transition: Transition.zoom, duration: const Duration(seconds: 1));
+    Get.to(()=> const ChangeLanguageScreen(), transition: Transition.fade, duration: const Duration(seconds: 1));
   }
 
   @override
