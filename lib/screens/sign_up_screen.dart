@@ -2,7 +2,7 @@ import 'package:bazei_taxi_app/common/color_extension.dart';
 import 'package:bazei_taxi_app/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_field/intl_phone_field.dart'; // Pacote para o campo de telefone internacional
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -12,102 +12,179 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  // Controladores para capturar os dados inseridos pelo usuário
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
+              const SizedBox(height: 50),
               // Logo centralizado
               Image.asset(
                 "assets/images/logo.png",
                 width: context.width * 0.30,
               ),
-              const SizedBox(height: 80), // Espaço maior entre o logo e o restante dos elementos
-              // Campo de telefone com seleção de país
-              IntlPhoneField(
+              const SizedBox(height: 20),
+              // Texto "Create new account"
+              const Text(
+                "Create new account",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 40),
+
+              // Campo Nome
+              TextField(
+                controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(),
+                  prefixIcon: Image.asset("assets/images/mdi-light_account.png",), // Ícone de pessoa
+                  labelText: "Name",
+                  labelStyle: const TextStyle(color: Colors.white),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                initialCountryCode: 'US', // Código do país inicial
+                style: const TextStyle(color: Colors.white), // Texto branco
+              ),
+              
+              const SizedBox(height: 20),
+              
+              // Campo Senha
+              TextField(
+                controller: _passwordController,
+                obscureText: true, // Esconde o texto digitado
+                decoration: InputDecoration(
+                 prefixIcon: Image.asset("assets/images/codicon_eye.png",), // Ícone de cadeado
+                  labelText: "Password",
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                style: TextStyle(color: Colors.white), // Texto branco
+              ),
+              
+              const SizedBox(height: 20),
+              
+              // Campo Confirmar Senha
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: true, // Esconde o texto digitado
+                decoration: InputDecoration(
+                  prefixIcon: Image.asset("assets/images/codicon_eye-closed.png"), // Ícone de cadeado
+                  labelText: "Confirm Password",
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                style: TextStyle(color: Colors.white), // Texto branco
+              ),
+              
+               const SizedBox(height: 20),
+              
+              // Campo de Telefone com seleção de país
+              IntlPhoneField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.phone, color: Colors.white), // Ícone de telefone
+                  labelText: 'Contact Number',
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                initialCountryCode: 'AO', // Define Angola como padrão
                 onChanged: (phone) {
-                  // Lógica para pegar o telefone com o código do país
-                  print(phone.completeNumber);
+                  print(phone.completeNumber); // Exibe o número completo com código do país
                 },
+                style: TextStyle(color: Colors.white), // Texto branco
+                dropdownTextStyle: TextStyle(color: Colors.white), // Texto branco na lista de seleção de país
               ),
-              const SizedBox(height: 25),
-              // Botões de login com Google, Facebook e Email
-              _buildSocialButton("assets/images/logos_google-icon.png", "Sign up with Google", () {
-                // Lógica para login com Google
-              }),
-              const SizedBox(height: 25),
-              _buildSocialButton("assets/images/logos_facebook.png", "Sign up with Facebook", () {
-                // Lógica para login com Facebook
-              }),
-              const SizedBox(height: 25),
-              _buildSocialButton("assets/images/logos_google-gmail.png", "Sign up with Email", () {
-                // Lógica para registro com Email
-              }),
-              const SizedBox(height: 50),
-              // Divisor com "ou"
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.white.withOpacity(0.1),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      "OR",
-                      style: TextStyle(
-                        color: ThemeColor.primaryTextWhite,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.white.withOpacity(0.1),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 50),
+              
+              const SizedBox(height: 40),
+              
               // Botão de Sign Up
               RoundButton(
                 title: "SIGN UP",
                 onPressed: () {
-                  // Lógica para criar a conta
+                  // Lógica para o cadastro do usuário
+                  String name = _nameController.text;
+                  String phone = _phoneController.text;
+                  String password = _passwordController.text;
+                  String confirmPassword = _confirmPasswordController.text;
+
+                  if (password == confirmPassword) {
+                    // Lógica para continuar o cadastro
+                    //print("User created: $name, $phone");
+                    Get.snackbar(
+                      "Success",
+                      "User created: $name, $phone",
+                      backgroundColor: Colors.green[400],
+                      colorText: Colors.white,
+                    );
+                  } else {
+                    // Exibir erro se as senhas não forem iguais
+                    Get.snackbar(
+                      "Error",
+                      "Passwords do not match!",
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                    );
+                  }
                 },
               ),
+              
               const SizedBox(height: 20),
+              
+              // Link para Login
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Already have an account?",
-                    style: TextStyle(
-                      color: ThemeColor.secondaryText,
-                      fontSize: 14,
+                      "Already have an account?",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
                   TextButton(
                     onPressed: () {
-                      // Lógica para redirecionar para a tela de login
+                      Get.back(); // Retorna para a tela anterior (Login)
                     },
                     child: Text(
-                      "Log In",
+                      "Sign in",
                       style: TextStyle(
                         color: ThemeColor.accentText,
                         fontSize: 14,
@@ -116,35 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ],
               ),
-              const Spacer(),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Função para construir os botões de login social
-  Widget _buildSocialButton(String iconPath, String label, VoidCallback onPressed) {
-    return SizedBox(
-      width: double.infinity,
-      child: OutlinedButton.icon(
-        onPressed: onPressed,
-        icon: Image.asset(
-          iconPath,
-          width: 20,
-          height: 20,
-        ),
-        label: Text(
-          label,
-          style: TextStyle(color: Colors.white),
-        ),
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(color: Colors.white), // Borda branca
-          padding: const EdgeInsets.symmetric(vertical: 14), // Aumentando o espaçamento interno
-          backgroundColor: Colors.transparent, // Fundo transparente
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
