@@ -41,15 +41,15 @@ class _SplashScreenState extends State<SplashScreen> {
             removeTop: true,
             removeBottom: true,
             child: Container(
-              width: double.infinity, // Ocupar toda a largura
-              height: double.infinity, // Ocupar toda a altura
+              width: double.infinity, 
+              height: double.infinity, 
               color: ThemeColor.primary,
             ),
           ),
-          // Exibir a imagem no centro da tela
+
           Image.asset(
             "assets/images/logo.png",
-            width: context.width * 0.30, // Define o tamanho da imagem
+            width: context.width * 0.30, 
           )
         ],
       ),
