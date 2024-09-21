@@ -1,5 +1,5 @@
 import 'package:bazei_taxi_app/common/color_extension.dart';
-import 'package:bazei_taxi_app/screens/home_screen.dart';
+import 'package:bazei_taxi_app/screens/sign_in_screen.dart';
 import 'package:bazei_taxi_app/screens/sign_up_screen.dart';
 import 'package:bazei_taxi_app/widgets/round_button.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +74,7 @@ class _AuthScreenState extends State<AuthScreen> {
               RoundButton(
                 title: "SIGN IN",
                 onPressed: () {
-                 Get.to(()=> const HomeScreen(), transition: Transition.rightToLeft, duration: const Duration(seconds: 1));
+                 Get.to(()=> const SignInScreen(), transition: Transition.rightToLeft, duration: const Duration(seconds: 1));
                 },
               ),
 

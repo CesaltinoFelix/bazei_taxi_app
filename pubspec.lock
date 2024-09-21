@@ -134,6 +134,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  flutter_otp_text_field:
+    dependency: "direct main"
+    description:
+      name: flutter_otp_text_field
+      sha256: "77e5ca5af01d2adf79757ffab4ad5ca29d5c710b3edf29e590fa5db7551d760e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -256,6 +264,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  otp_timer_button:
+    dependency: "direct main"
+    description:
+      name: otp_timer_button
+      sha256: "2c1dae65db0147add42f52558f88ad71a4a29a612d891e81323ea01bac983dcf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   path:
     dependency: transitive
     description:

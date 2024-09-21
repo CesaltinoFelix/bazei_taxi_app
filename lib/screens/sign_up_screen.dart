@@ -1,5 +1,8 @@
 import 'package:bazei_taxi_app/common/color_extension.dart';
+import 'package:bazei_taxi_app/screens/otp_screen.dart';
+import 'package:bazei_taxi_app/screens/sign_in_screen.dart';
 import 'package:bazei_taxi_app/widgets/round_button.dart';
+import 'package:bazei_taxi_app/widgets/round_button_circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -17,7 +20,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
-
+  String? completeNumber; 
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,74 +109,75 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                style: TextStyle(color: Colors.white), // Texto branco
+                style: TextStyle(color: Colors.white), 
               ),
               
                const SizedBox(height: 20),
-              
-              // Campo de Telefone com seleção de país
               IntlPhoneField(
                 controller: _phoneController,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.phone, color: Colors.white), // Ícone de telefone
+                  prefixIcon: Icon(Icons.phone, color: Colors.white), 
                   labelText: 'Contact Number',
                   labelStyle: TextStyle(color: Colors.white),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), 
                     borderRadius: BorderRadius.circular(8),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), // Borda branca com transparência
+                    borderSide: BorderSide(color: Colors.white.withOpacity(0.1)), 
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                initialCountryCode: 'AO', // Define Angola como padrão
+                initialCountryCode: 'AO',
                 onChanged: (phone) {
-                  print(phone.completeNumber); // Exibe o número completo com código do país
+                  completeNumber = phone.completeNumber;
                 },
-                style: TextStyle(color: Colors.white), // Texto branco
-                dropdownTextStyle: TextStyle(color: Colors.white), // Texto branco na lista de seleção de país
+                style: const TextStyle(color: Colors.white), 
+                dropdownTextStyle: TextStyle(color: Colors.white), 
               ),
               
               const SizedBox(height: 40),
-              
-              // Botão de Sign Up
-              RoundButton(
-                title: "SIGN UP",
-                onPressed: () {
-                  // Lógica para o cadastro do usuário
-                  String name = _nameController.text;
-                  String phone = _phoneController.text;
-                  String password = _passwordController.text;
-                  String confirmPassword = _confirmPasswordController.text;
 
-                  if (password == confirmPassword) {
-                    // Lógica para continuar o cadastro
-                    //print("User created: $name, $phone");
-                    Get.snackbar(
-                      "Success",
-                      "User created: $name, $phone",
-                      backgroundColor: Colors.green[400],
-                      colorText: Colors.white,
-                    );
-                  } else {
-                    // Exibir erro se as senhas não forem iguais
-                    Get.snackbar(
-                      "Error",
-                      "Passwords do not match!",
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white,
-                    );
-                  }
-                },
-              ),
-              
+            isLoading ? 
+            const RoundButtonCircularProgress()
+            : 
+            RoundButton(
+              title: "CONTINUE",
+              onPressed: () async {
+                setState((){
+                  isLoading = true;
+                });
+                String name = _nameController.text;
+                String password = _passwordController.text;
+                String confirmPassword = _confirmPasswordController.text;
+
+                if (password == confirmPassword) {
+                  Future.delayed(const Duration(seconds: 3), () {
+                    setState((){
+                    isLoading = false;
+                    });
+                    Get.to(
+                      OTPScreen( name: name, number: completeNumber, password: password,), 
+                      transition: Transition.rightToLeft, duration: const Duration(seconds: 1)
+                      );
+                    }
+                  );
+                } else {
+                  Get.snackbar(
+                    "Error",
+                    "Passwords do not match!",
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                }
+              },
+            ),
+
               const SizedBox(height: 20),
               
-              // Link para Login
               Row(
                 children: [
-                  Text(
+                  const Text(
                       "Already have an account?",
                       style: TextStyle(
                         color: Colors.white,
@@ -181,7 +186,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   TextButton(
                     onPressed: () {
-                      Get.back(); // Retorna para a tela anterior (Login)
+                       Get.to(
+                      const SignInScreen(), 
+                      transition: Transition.rightToLeft, duration: const Duration(seconds: 1)
+                      );
                     },
                     child: Text(
                       "Sign in",

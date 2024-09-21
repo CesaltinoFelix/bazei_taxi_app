@@ -51,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          "A maneira mais prática e confortável de se deslocar pela cidade, com segurança e rapidez a qualquer hora.",
+                          "The best way to get around the city, with safety, speed, and comfort.\nYour city, your rules. Travel your way.",
                           style: TextStyle(
                             color: ThemeColor.primaryTextWhite,
                             fontSize: 16,
